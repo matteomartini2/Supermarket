@@ -1,18 +1,16 @@
 task 
 	Lorenzo:
 	- UserService
-	-PodottoService
-	-StoricoService
+	- PodottoService
+	- StoricoService
 	- UserCtrl
-	-PodottoCtrl
-	-StoricoCtrl
-	
-	
+	- PodottoCtrl
+	- StoricoCtrl
 	
 	
 	Matteo:
-	-CartaCreditoService
-	-CartaCreditoCtrl
+	- CartaCreditoService
+	- CartaCreditoCtrl
 	
 	
 	
