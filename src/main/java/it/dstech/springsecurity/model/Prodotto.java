@@ -3,10 +3,11 @@ package it.dstech.springsecurity.model;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
 
+@Entity
 public class Prodotto extends Base{
 	/**
 	 * Prodotto
@@ -31,7 +32,7 @@ public class Prodotto extends Base{
 	@Column(name="data_di_scadenza")
 	private LocalDate dataDiScadenza;
 	
-	@JoinColumn
+	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	
 	@Column(name="quantita_disponibile")
