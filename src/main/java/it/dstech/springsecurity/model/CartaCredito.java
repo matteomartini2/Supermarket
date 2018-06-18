@@ -3,15 +3,21 @@ package it.dstech.springsecurity.model;
 import java.time.LocalDate;
 import java.util.Base64;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity(name="cartacredito")
-public class CartaCredito {
+@Entity(name="carta_credito")
+public class CartaCredito  extends Base{
 	
+	@Column (name= "cvv", nullable= false)
 	private String cvv;
+	@Column(name= "credito", nullable = false)
 	private Double credito;
+	@Column(name="user",nullable= false)
 	private User user;
+	@Column(name="scadenza", nullable=false)
 	private LocalDate scadenza;
+	@Column(name= "numero", unique = true, nullable = false)
 	private String numero;
 	
 	public String getCvv() {
