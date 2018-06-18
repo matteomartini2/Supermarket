@@ -1,0 +1,74 @@
+SUPERMARKET
+
+Entità:
+
+- User
+ id: int;          
+ username(mail): string;
+ password: string;
+ role: RoleUser;
+ tel: string;
+ via: string;
+ cap: string;
+ citta: string;
+ prov: string;
+ cartaCredito; List<CartaCredito>;
+ storico: List<Storico>;
+
+- CartaCredito
+ int: id;
+ numero: string; (criptato Base64)
+ scadenza: LocalDate (mm/aa)
+ ccv: string;
+ credito: double;
+ user: User;
+
+- Prodotto
+ id: int;
+ nome: string;
+ marca: string;
+ dataDiScadenza: LocalDate; (prodotti con scadenza <3gg sconto 40%)
+ categoria: Categoria;
+ quantitaDisponibile: int;
+ unita: Unita;
+ prezzoUnitario: double;
+ prezzoIvato: double;
+ offerta: int; (percentuale, random 5 prodotti in offerta al giorno)
+
+
+- Categoria (enum)
+ ALIMENTI, PROD_CASA, PROD_PERSONA, ANIMALI
+
+- Unita (enum)
+ LITRO, CHILO, ETTO, PEZZO
+
+- Storico
+ id: int;
+ user: User;
+ prodotti: Array<Prodotto>;
+ totale: double;
+ data: LocalDate;
+
+
+/user/login       POST
+/user/register      POST
+/user/logout      OPTION
+/user/update      PUT
+
+/cartaCredito/{id}     GET
+/cartaCredito       GET
+/cartaCredito       POST
+/cartaCredito       PUT
+/cartaCredito/{id}     DELETE
+
+/prodotto *       POST \\ salva nuovi prodotti (accetta array di prodotti)
+
+/prodotto/{id}      GET  \\ get by id
+/prodotto        GET  \\ get tutti i prodotti
+/prodotto/disponibili     GET  \\ get prodotti disponibili
+/prodotto/categoria      GET  \\ get prodotti per categoria (la cat. si passsa             nell'header)
+/prodotto         PUT   \\ acquisto prodotti (accetta array di prodotti e             crea lo storico per l'acqisto)
+
+/storico/{idUser}     GET  \\ get lista storico per user  
+
+* solo utente ADMIN
