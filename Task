@@ -1,0 +1,19 @@
+task 
+	Lorenzo:
+	- UserService
+	-PodottoService
+	-StoricoService
+	- UserCtrl
+	-PodottoCtrl
+	-StoricoCtrl
+	
+	
+	
+	
+	Matteo:
+	-CartaCreditoService
+	-CartaCreditoCtrl
+	
+	
+	
+	Paolo:
