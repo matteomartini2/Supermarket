@@ -10,8 +10,8 @@ import javax.persistence.JoinColumn;
 public class Prodotto extends Base{
 	/**
 	 * Prodotto
- 	id: int;
- 	nome: string;
+	 id: int;
+	 nome: string;
 	 marca: string;
 	 dataDiScadenza: LocalDate; (prodotti con scadenza <3gg sconto 40%)
 	 categoria: Categoria;
@@ -45,6 +45,9 @@ public class Prodotto extends Base{
 	
 	@Column(name="prezzo_ivato")
 	private double prezzoIvato;
+	
+	@Column
+	private int offerta;
 
 	public String getNome() {
 		return nome;
@@ -108,6 +111,14 @@ public class Prodotto extends Base{
 
 	public void setPrezzoIvato(double prezzoIvato) {
 		this.prezzoIvato = prezzoIvato;
+	}
+
+	public int getOfferta() {
+		return offerta;
+	}
+
+	public void setOfferta(int offerta) {
+		this.offerta = offerta;
 	}
 	
 	
