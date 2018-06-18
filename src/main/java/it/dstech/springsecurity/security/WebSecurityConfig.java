@@ -39,9 +39,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests()
+		.antMatchers("/user/login", "/user/register", "/user/update", "/user/logout").hasAnyRole("USER")
+		.antMatchers("/cartaCredito/**", "/cartaCredito").hasAnyRole("USER")
+		.antMatchers("/prodotto/**", "/prodotto", "/prodotto/disponibili", "/prodotto/categoria").hasAnyRole("USER")
+		.antMatchers("/storico/**").hasAnyRole("USER")
+		.antMatchers(HttpMethod.POST, "/prodotto").hasAnyRole("ADMIN")
+		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+		.anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.permitAll().and().csrf().disable();
+		
+		/*http.httpBasic().and().authorizeRequests()
 				.antMatchers("/utente/create", "/utente/login", "/utente/register", "/utente/findAll").permitAll()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().and().csrf().disable();
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll().and().csrf().disable();*/
 	}
 
 	@Bean
