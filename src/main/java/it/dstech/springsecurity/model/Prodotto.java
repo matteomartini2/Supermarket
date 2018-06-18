@@ -112,6 +112,14 @@ public class Prodotto extends Base{
 	public void setPrezzoIvato(double prezzoIvato) {
 		this.prezzoIvato = prezzoIvato;
 	}
+
+	public int getOfferta() {
+		return offerta;
+	}
+
+	public void setOfferta(int offerta) {
+		this.offerta = offerta;
+	}
 	
 	
 	
