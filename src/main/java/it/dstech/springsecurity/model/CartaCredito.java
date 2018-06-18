@@ -5,18 +5,30 @@ import java.util.Base64;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="carta_credito")
 public class CartaCredito  extends Base{
 	
 	@Column (name= "cvv", nullable= false)
 	private String cvv;
+	
 	@Column(name= "credito", nullable = false)
 	private Double credito;
-	@Column(name="user",nullable= false)
+
+	//manytoOne 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name="user_id", nullable= false)
 	private User user;
+	
 	@Column(name="scadenza", nullable=false)
 	private LocalDate scadenza;
+	
 	@Column(name= "numero", unique = true, nullable = false)
 	private String numero;
 	
@@ -38,8 +50,7 @@ public class CartaCredito  extends Base{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+		
 	public LocalDate getScadenza() {
 		return scadenza;
 	}

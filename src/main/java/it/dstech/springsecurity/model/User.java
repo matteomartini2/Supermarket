@@ -2,10 +2,15 @@ package it.dstech.springsecurity.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User extends Base {
@@ -32,9 +37,13 @@ public class User extends Base {
 	private String prov;
 	
 	// OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
+	@JsonIgnore
 	private List<CartaCredito> cartaCredito;
 	
 	// OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="user")
+	@JsonIgnore
 	private List<Storico> storico;
 
 	/**

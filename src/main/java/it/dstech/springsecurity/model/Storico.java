@@ -3,16 +3,28 @@ package it.dstech.springsecurity.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Storico extends Base {
 	
 	// ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
 	// OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="storico")
+	@JsonIgnore
 	private List<Prodotto> prodotti;
 	
 	@Column(name = "totale", nullable = false)
