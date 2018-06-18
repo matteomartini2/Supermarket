@@ -31,8 +31,10 @@ public class User extends Base {
 	@Column(name = "prov", nullable = false)
 	private String prov;
 	
+	// OneToMany
 	private List<CartaCredito> cartaCredito;
 	
+	// OneToMany
 	private List<Storico> storico;
 
 	/**
