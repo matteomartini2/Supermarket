@@ -6,6 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Prodotto extends Base{
@@ -31,6 +36,11 @@ public class Prodotto extends Base{
 	
 	@Column(name="data_di_scadenza")
 	private LocalDate dataDiScadenza;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	@JoinColumn(name = "storico_id", nullable = false)
+	private Storico storico;
 	
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
