@@ -39,13 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests()
-		.antMatchers("/user/login", "/user/register", "/user/update", "/user/logout").permitAll()
-		.antMatchers("/cartaCredito/**", "/cartaCredito").hasAnyRole("USER")
+		.antMatchers("/user/login", "/user/register"/*, "/user/logout"*/).permitAll()
+		.antMatchers("/cartaCredito/**", "/cartaCredito", "/user/update").hasAnyRole("USER")
 		.antMatchers("/prodotto/**", "/prodotto", "/prodotto/disponibili", "/prodotto/categoria").hasAnyRole("USER")
 		.antMatchers("/storico/**").hasAnyRole("USER")
 		.antMatchers(HttpMethod.POST, "/prodotto").hasAnyRole("ADMIN")
 		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-		.anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		.anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
 		.permitAll().and().csrf().disable();
 		
 		/*http.httpBasic().and().authorizeRequests()

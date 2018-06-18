@@ -70,4 +70,10 @@ public class UserCtrl {
 		return service.create(user);
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT, value = "/update") 
+	public User updateUser(@RequestBody User user) {
+	
+		return service.update(user);
+	}
+	
 }
