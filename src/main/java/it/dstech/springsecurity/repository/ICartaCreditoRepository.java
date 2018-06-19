@@ -6,5 +6,5 @@ import it.dstech.springsecurity.model.CartaCredito;
 
 public interface ICartaCreditoRepository  extends CrudRepository<CartaCredito, Long>{
 	
-
+	public CartaCredito findByNumero(String numero);
 }
