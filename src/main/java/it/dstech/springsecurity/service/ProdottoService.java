@@ -115,5 +115,23 @@ public class ProdottoService {
 		return storicoService.create(s);
 		
 	}
+	
+	public Iterable<Prodotto> findByDisponibilita() {
+		
+		ArrayList<Prodotto> listaDisponibili = (ArrayList<Prodotto>) dao.findAll();
+		
+		for(Prodotto p : listaDisponibili) {
+			if(p.getQuantitaDisponibile() < 1) {
+				listaDisponibili.remove(p);
+			}
+		}
+		
+		return listaDisponibili;
+	}
+	
+	public Iterable<Prodotto> findByCategoria(String categoria) {
+		
+		return dao.findByCategoria(categoria);
+	}
 
 }

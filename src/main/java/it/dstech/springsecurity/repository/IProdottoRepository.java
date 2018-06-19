@@ -5,5 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 import it.dstech.springsecurity.model.Prodotto;
 
 public interface IProdottoRepository  extends CrudRepository<Prodotto, Long>{
+	
+	public Iterable<Prodotto> findByCategoria(String categoria);
 
 }
