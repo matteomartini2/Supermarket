@@ -58,7 +58,7 @@ public class CartaCreditoService {
 		if(listaCarteCredito==null) listaCarteCredito = new ArrayList<>();
 		listaCarteCredito.add(carta);
 		user.setCartaCredito(listaCarteCredito);
-		
+		carta.setUser(user);
 		return dao.save(carta);
 		
 		
