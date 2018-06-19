@@ -25,8 +25,8 @@ public class CartaCreditoCtrl {
 		return serviceCarta.findAll();
 	}
 	
-	@GetMapping("/findOne}")
-	public CartaCredito findOne(Long id) {
+	@GetMapping("/findOne/{id}")
+	public CartaCredito findOne(@PathVariable ("id") Long id) {
 		return serviceCarta.findOne(id);
 		
 	}
