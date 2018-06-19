@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.dstech.springsecurity.model.CartaCredito;
+import it.dstech.springsecurity.model.Categoria;
 import it.dstech.springsecurity.model.Prodotto;
 import it.dstech.springsecurity.model.Storico;
 import it.dstech.springsecurity.repository.IProdottoRepository;
@@ -129,7 +130,7 @@ public class ProdottoService {
 		return listaDisponibili;
 	}
 	
-	public Iterable<Prodotto> findByCategoria(String categoria) {
+	public Iterable<Prodotto> findByCategoria(Categoria categoria) {
 		
 		return dao.findByCategoria(categoria);
 	}
