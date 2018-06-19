@@ -49,5 +49,12 @@ public class CartaCreditoCtrl {
 		
 	}
 	
+	@PostMapping("/associaCarta")
+	public void associaCarta(@RequestBody String carta) {
+		
+		serviceCarta.associaCartaCreditoUtente(serviceCarta.findByNumero(carta).getId());
+		
+	}
+	
 
 }
