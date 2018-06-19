@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity(name="storico")
 public class Storico extends Base {
 	
 	// ManyToOne
