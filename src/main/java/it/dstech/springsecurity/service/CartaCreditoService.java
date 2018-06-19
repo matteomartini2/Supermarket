@@ -6,8 +6,6 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import it.dstech.springsecurity.model.CartaCredito;
 import it.dstech.springsecurity.model.User;
 import it.dstech.springsecurity.repository.ICartaCreditoRepository;
@@ -60,9 +58,6 @@ public class CartaCreditoService {
 		user.setCartaCredito(listaCarteCredito);
 		carta.setUser(user);
 		return dao.save(carta);
-		
-		
-		
-		
+
 	}
 }
