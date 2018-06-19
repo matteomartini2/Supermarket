@@ -28,6 +28,7 @@ public class StoricoService {
 	}
 	
 	public Storico create(Storico storico) {
+		
 		return dao.save(storico);
 	}
 	

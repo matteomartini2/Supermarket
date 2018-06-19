@@ -8,8 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,8 +23,14 @@ public class Storico extends Base {
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 	
-	// OneToMany
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="storico")
+	// ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	@JoinTable(name = "storico_prodotto", joinColumns = {
+			@JoinColumn(name = "storico_id", nullable = false, updatable = true)
+	}, inverseJoinColumns = {
+			@JoinColumn(name = "prodotto_id", nullable = false, updatable = true)
+	})
+	@JsonIgnore	
 	private List<Prodotto> prodotti;
 	
 	@Column(name = "totale", nullable = false)

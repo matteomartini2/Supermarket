@@ -120,6 +120,8 @@ public class ProdottoService {
 		for(Prodotto p : listaProdotti) {
 			p.setQuantitaDisponibile(p.getQuantitaDisponibile()-1);
 			s.getProdotti().add(p);
+			
+			p.getStorici().add(s);
 		}
 		s.setTotale(contoTotale);
 		s.setData(LocalDate.now());

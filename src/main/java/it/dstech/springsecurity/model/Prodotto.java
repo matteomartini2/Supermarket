@@ -1,14 +1,14 @@
 package it.dstech.springsecurity.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,10 +37,9 @@ public class Prodotto extends Base{
 	@Column(name="data_di_scadenza")
 	private LocalDate dataDiScadenza;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "prodotti")
 	@JsonIgnore
-	@JoinColumn(name = "storico_id")
-	private Storico storico;
+	private List<Storico> storici;
 	
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
@@ -132,6 +131,19 @@ public class Prodotto extends Base{
 		this.offerta = offerta;
 	}
 	
-	
+
+	/**
+	 * @return the storici
+	 */
+	public List<Storico> getStorici() {
+		return storici;
+	}
+
+	/**
+	 * @param storici the storici to set
+	 */
+	public void setStorici(List<Storico> storici) {
+		this.storici = storici;
+	}
 	
 }

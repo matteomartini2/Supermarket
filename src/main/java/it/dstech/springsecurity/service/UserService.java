@@ -3,7 +3,6 @@ package it.dstech.springsecurity.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.springsecurity.model.User;
@@ -14,9 +13,6 @@ public class UserService {
 	
 	@Autowired
 	private IUserRepository dao;
-	
-	@Autowired
-	private PasswordEncoder encoder;
 	
 	public Iterable<User> findAll() {
 		
@@ -52,7 +48,6 @@ public class UserService {
 		old.setCap(u.getCap());
 		old.setCartaCredito(u.getCartaCredito());
 		old.setCitta(u.getCitta());
-		old.setPassword(encoder.encode(u.getPassword()));
 		old.setPassword(u.getPassword());
 		old.setProv(u.getProv());
 		old.setRole(u.getRole());

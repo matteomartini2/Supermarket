@@ -1,17 +1,3 @@
-task 
-	Lorenzo:
-	- UserService
-	- PodottoService
-	- StoricoService
-	- UserCtrl
-	- PodottoCtrl
-	- StoricoCtrl
-	
-	 
-	Matteo:
-	- CartaCreditoService
-	- CartaCreditoCtrl
-	
-	
-	
-	Paolo:
+tasks:
+
+	controllare perché storico viene aggiunto due volte
