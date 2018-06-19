@@ -36,9 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests()
 		.antMatchers("/user/login", "/user/register"/*, "/user/logout"*/).permitAll()
-		.antMatchers("/cartaCredito/**", "/cartaCredito", "/user/update").hasAnyRole("USER")
-		.antMatchers("/prodotto/**", "/prodotto", "/prodotto/disponibili", "/prodotto/categoria").hasAnyRole("USER")
-		.antMatchers("/storico/**").hasAnyRole("USER")
+		.antMatchers(HttpMethod.GET, "/cartaCredito/{id}", "/cartaCredito", "/prodotto/{id}", "/prodotto", "/prodotto/disponibili", "/prodotto/categoria", "/storico/{id}").hasAnyRole("USER", "ADMIN")
+		.antMatchers(HttpMethod.POST, "/cartaCredito").hasAnyRole("USER", "ADMIN")
+		.antMatchers(HttpMethod.PUT, "/prodotto", "/user/update", "/cartaCredito").hasAnyRole("USER", "ADMIN")
+		.antMatchers(HttpMethod.DELETE, "/cartaCredito/{id}").hasAnyRole("USER", "ADMIN")
 		.antMatchers(HttpMethod.POST, "/prodotto").hasAnyRole("ADMIN")
 		.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 		.anyRequest().authenticated().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
