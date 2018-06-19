@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,7 +19,7 @@ import it.dstech.springsecurity.service.ProdottoService;
 
 @RestController
 @RequestMapping("/prodotto")
-public class ProtottoCtrl {
+public class ProdottoCtrl {
 
 	@Autowired
 	private ProdottoService service;
@@ -51,5 +52,11 @@ public class ProtottoCtrl {
 	public Storico acquista(@RequestBody List<Prodotto> listaProdotti, @RequestHeader("idCarta") Long idCartaCredito) {
 		
 		return service.acquista(listaProdotti, idCartaCredito);
+	}
+	
+	@PostMapping("")
+	public Prodotto create(@RequestBody Prodotto p) {
+		
+		return service.create(p);
 	}
 }
