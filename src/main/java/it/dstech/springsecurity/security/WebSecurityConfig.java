@@ -25,10 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return super.userDetailsService();
-	}
+	
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
