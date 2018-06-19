@@ -49,7 +49,7 @@ public class ProdottoCtrl {
 	}
 	
 	@PutMapping("")
-	public Storico acquista(@RequestBody List<Prodotto> listaProdotti, @RequestHeader("idCarta") Long idCartaCredito) {
+	public Storico acquista(@RequestBody List<Long> listaProdotti, @RequestHeader("idCarta") Long idCartaCredito) {
 		
 		return service.acquista(listaProdotti, idCartaCredito);
 	}

@@ -73,11 +73,15 @@ public class ProdottoService {
 		return dao.save(old);
 	}
 	
-	public Storico acquista (List<Prodotto> listaProdotti, Long idCartaCredito) {
+	public Storico acquista (List<Long> listaIdProdotti, Long idCartaCredito) {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User u = userService.findByUsername(auth.getName());
 
+		ArrayList<Prodotto> listaProdotti = new ArrayList<>();
+		for(Long id : listaIdProdotti) {
+			listaProdotti.add(dao.findById(id).get());
+		}
 		for(Prodotto p : listaProdotti) {
 			if(p.getQuantitaDisponibile() < 1) {
 				return null;
