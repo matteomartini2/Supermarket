@@ -39,7 +39,7 @@ public class Prodotto extends Base{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
-	@JoinColumn(name = "storico_id", nullable = false)
+	@JoinColumn(name = "storico_id")
 	private Storico storico;
 	
 	@Enumerated(EnumType.STRING)
