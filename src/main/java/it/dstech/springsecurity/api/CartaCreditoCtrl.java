@@ -13,7 +13,7 @@ import it.dstech.springsecurity.model.CartaCredito;
 import it.dstech.springsecurity.service.CartaCreditoService;
 
 @RestController
-@RequestMapping(name="/cartacredito")
+@RequestMapping("/cartaCredito")
 public class CartaCreditoCtrl {
 	
 	@Autowired
