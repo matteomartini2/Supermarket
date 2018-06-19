@@ -24,9 +24,6 @@ public class ProdottoService {
 	@Autowired
 	private StoricoService storicoService;
 	
-	@Autowired
-	private ProdottoService prodottoService;
-	
 	public Iterable<Prodotto> findAll() {
 		
 		return dao.findAll();
