@@ -24,7 +24,6 @@ public class Storico extends Base {
 	
 	// OneToMany
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="storico")
-	@JsonIgnore
 	private List<Prodotto> prodotti;
 	
 	@Column(name = "totale", nullable = false)
