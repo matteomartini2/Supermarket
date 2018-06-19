@@ -49,17 +49,24 @@ Entità:
  totale: double;
  data: LocalDate;
 
+// USER
 
 /user/login       		POST
 /user/register    		POST
 /user/logout      		OPTION
 /user/update      		PUT
 
+
+// CARTACREDITO
+
 /cartaCredito/{id}     	GET
 /cartaCredito       	GET
 /cartaCredito       	POST
 /cartaCredito       	PUT
 /cartaCredito/{id}     	DELETE
+
+
+// PRODOTTO
 
 /prodotto *       		POST \\ salva nuovi prodotti (accetta array di prodotti)
 
@@ -68,6 +75,9 @@ Entità:
 /prodotto/disponibili   GET  \\ get prodotti disponibili
 /prodotto/categoria     GET  \\ get prodotti per categoria (la cat. si passa nell'header)
 /prodotto         		PUT  \\ acquisto prodotti (accetta array di prodotti e crea lo storico per l'acqisto)
+
+
+// STORICO 
 
 /storico/{idUser}     	GET  \\ get lista storico per user  
 
