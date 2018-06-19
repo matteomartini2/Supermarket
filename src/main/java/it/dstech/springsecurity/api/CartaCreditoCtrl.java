@@ -49,6 +49,12 @@ public class CartaCreditoCtrl {
 		
 	}
 	
+	@PostMapping("/create")
+	public CartaCredito create(@RequestBody CartaCredito carta) {
+		
+		return serviceCarta.create(carta);
+	}
+	
 	@PostMapping("/associaCarta")
 	public void associaCarta(@RequestBody String carta) {
 		

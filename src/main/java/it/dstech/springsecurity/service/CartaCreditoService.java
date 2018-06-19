@@ -73,4 +73,19 @@ public class CartaCreditoService {
 		return dao.save(carta);
 
 	}
+	
+	public CartaCredito create(CartaCredito carta) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userService.findByUsername(auth.getName());
+		
+		List<CartaCredito> listaCarte =  u.getCartaCredito();
+		if(listaCarte == null) listaCarte = new ArrayList<CartaCredito>();
+		
+		listaCarte.add(carta);
+		carta.setUser(u);
+		
+		return dao.save(carta);
+
+	}
 }
