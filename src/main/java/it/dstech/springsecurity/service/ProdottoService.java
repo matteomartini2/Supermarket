@@ -91,7 +91,7 @@ public class ProdottoService {
 		for(Prodotto p : listaProdotti) {
 			if(p.getOfferta() > 0) {
 				contoTotale += (p.getPrezzoIvato() - (p.getPrezzoIvato()*p.getOfferta()/100));
-			} else if (p.getDataDiScadenza().isEqual(LocalDate.now().minusDays(3))) {
+			} else if (p.getDataDiScadenza().isBefore((LocalDate.now().minusDays(3)))) {
 				contoTotale += (p.getPrezzoIvato() - (p.getPrezzoIvato()*40/100));
 			} else {
 				contoTotale += p.getPrezzoIvato();
