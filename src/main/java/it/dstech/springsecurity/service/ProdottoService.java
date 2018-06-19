@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import it.dstech.springsecurity.model.CartaCredito;
 import it.dstech.springsecurity.model.Categoria;
 import it.dstech.springsecurity.model.Prodotto;
 import it.dstech.springsecurity.model.Storico;
+import it.dstech.springsecurity.model.User;
 import it.dstech.springsecurity.repository.IProdottoRepository;
 
 @Service
@@ -24,6 +27,9 @@ public class ProdottoService {
 	
 	@Autowired
 	private StoricoService storicoService;
+	
+	@Autowired
+	private UserService userService;
 	
 	public Iterable<Prodotto> findAll() {
 		
@@ -69,6 +75,8 @@ public class ProdottoService {
 	
 	public Storico acquista (List<Prodotto> listaProdotti, Long idCartaCredito) {
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userService.findByUsername(auth.getName());
 
 		for(Prodotto p : listaProdotti) {
 			if(p.getQuantitaDisponibile() < 1) {
@@ -99,8 +107,8 @@ public class ProdottoService {
 		}
 		
 		Storico s = new Storico();
-		//user = current logged user
 		
+		s.setUser(u);
 		s.setProdotti(new ArrayList<Prodotto>());
 		for(Prodotto p : listaProdotti) {
 			p.setQuantitaDisponibile(p.getQuantitaDisponibile()-1);
@@ -112,6 +120,14 @@ public class ProdottoService {
 		for(Prodotto p : listaProdotti) {
 			update(p);
 		}
+		
+		List<Storico> listaStorico = u.getStorico();
+		if(listaStorico == null) listaStorico = new ArrayList<>();
+		
+		listaStorico.add(s);
+		u.setStorico(listaStorico);
+		userService.update(u);
+
 		
 		return storicoService.create(s);
 		

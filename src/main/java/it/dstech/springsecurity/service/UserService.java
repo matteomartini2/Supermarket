@@ -57,5 +57,10 @@ public class UserService {
 		
 		return dao.save(old);
 	}
+	
+	public User findByUsername(String username) {
+		
+		return dao.findByUsername(username);
+	}
 
 }
