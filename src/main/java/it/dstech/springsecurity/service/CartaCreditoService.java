@@ -1,16 +1,23 @@
 package it.dstech.springsecurity.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import it.dstech.springsecurity.model.CartaCredito;
+import it.dstech.springsecurity.model.User;
 import it.dstech.springsecurity.repository.ICartaCreditoRepository;
+import it.dstech.springsecurity.repository.IUserRepository;
 
 @Service
 public class CartaCreditoService {
 	
 	private ICartaCreditoRepository dao;
+	private IUserRepository utenteService;
 	
 	
 	public CartaCredito findOne(Long id) {
@@ -41,6 +48,21 @@ public class CartaCreditoService {
 		cart.setUser(carta.getUser());
 		
 		return dao.save(cart);
+		
+	}
+	
+	public CartaCredito associaCartaCreditoUtente(Long idCarta,Long idUtente ) {
+		CartaCredito carta = dao.findById(idCarta).get();
+		User user = utenteService.findById(idUtente).get();
+		List<CartaCredito> listaCarteCredito = user.getCartaCredito();
+		if(listaCarteCredito==null) listaCarteCredito = new ArrayList<>();
+		listaCarteCredito.add(carta);
+		user.setCartaCredito(listaCarteCredito);
+		
+		return dao.save(carta);
+		
+		
+		
 		
 	}
 }
