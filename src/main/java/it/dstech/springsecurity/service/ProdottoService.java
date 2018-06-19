@@ -86,7 +86,7 @@ public class ProdottoService {
 			} else if (p.getDataDiScadenza().isEqual(LocalDate.now().minusDays(3))) {
 				contoTotale += (p.getPrezzoIvato() - (p.getPrezzoIvato()*40/100));
 			} else {
-			contoTotale += p.getPrezzoUnitario();
+				contoTotale += p.getPrezzoIvato();
 			}
 		}
 		
