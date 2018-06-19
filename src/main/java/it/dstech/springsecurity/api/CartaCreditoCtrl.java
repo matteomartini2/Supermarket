@@ -20,24 +20,24 @@ public class CartaCreditoCtrl {
 	CartaCreditoService serviceCarta;
 	
 	
-	@GetMapping("/cartacredito/tutto")
+	@GetMapping("/findAll")
 	public Iterable<CartaCredito> findAll(){
 		return serviceCarta.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/findOne}")
 	public CartaCredito findOne(Long id) {
 		return serviceCarta.findOne(id);
 		
 	}
 	
-	@PostMapping("/cartacredito")
+	@PostMapping("/update")
 	public void update(@RequestBody CartaCredito carta ) {
 		serviceCarta.update(carta);
 		
 	}
 	
-	@DeleteMapping("/{id}/")
+	@DeleteMapping("/deleteOne")
 	public void delete(@PathVariable ("id") Long id) {
 		serviceCarta.deleteOne(id);
 		
