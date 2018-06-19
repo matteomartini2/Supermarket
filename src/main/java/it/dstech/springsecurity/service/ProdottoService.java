@@ -1,9 +1,15 @@
 package it.dstech.springsecurity.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.dstech.springsecurity.model.CartaCredito;
 import it.dstech.springsecurity.model.Prodotto;
+import it.dstech.springsecurity.model.Storico;
 import it.dstech.springsecurity.repository.IProdottoRepository;
 
 @Service
@@ -11,6 +17,15 @@ public class ProdottoService {
 	
 	@Autowired
 	private IProdottoRepository dao;
+	
+	@Autowired
+	private CartaCreditoService cartaCreditoService;
+	
+	@Autowired
+	private StoricoService storicoService;
+	
+	@Autowired
+	private ProdottoService prodottoService;
 	
 	public Iterable<Prodotto> findAll() {
 		
@@ -37,7 +52,7 @@ public class ProdottoService {
 		return dao.save(p);
 	}
 	
-	public Prodotto update(Long id, Prodotto p) {
+	public Prodotto update(Prodotto p) {
 		
 		Prodotto old = dao.findById(p.getId()).get();
 		
@@ -52,6 +67,56 @@ public class ProdottoService {
 		old.setUnita(p.getUnita());
 		
 		return dao.save(old);
+	}
+	
+	public Storico acquista (List<Prodotto> listaProdotti, Long idCartaCredito) {
+		
+
+		for(Prodotto p : listaProdotti) {
+			if(p.getQuantitaDisponibile() < 1) {
+				return null;
+				//TODO 
+				// throw exception
+			}
+		}
+		
+		Double contoTotale = 0.0;
+		
+		for(Prodotto p : listaProdotti) {
+			if(p.getOfferta() > 0) {
+				contoTotale += (p.getPrezzoIvato() - (p.getPrezzoIvato()*p.getOfferta()/100));
+			} else if (p.getDataDiScadenza().isEqual(LocalDate.now().minusDays(3))) {
+				contoTotale += (p.getPrezzoIvato() - (p.getPrezzoIvato()*40/100));
+			} else {
+			contoTotale += p.getPrezzoUnitario();
+			}
+		}
+		
+		CartaCredito carta = cartaCreditoService.findOne(idCartaCredito);
+		
+		if(carta.getCredito() < contoTotale) {
+			return null; 
+			// TODO
+			// lanciare exception
+		}
+		
+		Storico s = new Storico();
+		//user = current logged user
+		
+		s.setProdotti(new ArrayList<Prodotto>());
+		for(Prodotto p : listaProdotti) {
+			p.setQuantitaDisponibile(p.getQuantitaDisponibile()-1);
+			s.getProdotti().add(p);
+		}
+		s.setTotale(contoTotale);
+		s.setData(LocalDate.now());
+		
+		for(Prodotto p : listaProdotti) {
+			update(p);
+		}
+		
+		return storicoService.create(s);
+		
 	}
 
 }
