@@ -110,6 +110,9 @@ public class ProdottoService {
 			// lanciare exception
 		}
 		
+		carta.setCredito(carta.getCredito()-contoTotale);
+		cartaCreditoService.update(carta);
+		
 		Storico s = new Storico();
 		
 		s.setUser(u);
