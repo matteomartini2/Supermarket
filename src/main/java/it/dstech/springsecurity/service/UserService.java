@@ -1,7 +1,5 @@
 package it.dstech.springsecurity.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +17,11 @@ public class UserService {
 		return dao.findAll();
 	}
 	
-	public User findOne(Long id) {
+	public User findOne(Long id) throws Exception {
 		
-		Optional<User> user = dao.findById(id);
+	 User user = dao.findById(id).orElseThrow(() -> new Exception());
 		
-		return user.get();
+		return user;
 	}
 	
 	public void deleteAll() {

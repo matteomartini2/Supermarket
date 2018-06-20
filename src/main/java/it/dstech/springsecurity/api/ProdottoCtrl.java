@@ -31,7 +31,7 @@ public class ProdottoCtrl {
 	}
 	
 	@GetMapping("/{id}")
-	public Prodotto findOne(@PathVariable("id") Long id) {
+	public Prodotto findOne(@PathVariable("id") Long id) throws Exception {
 		
 		return service.findOne(id);
 	}
@@ -49,7 +49,7 @@ public class ProdottoCtrl {
 	}
 	
 	@PutMapping("")
-	public Storico acquista(@RequestBody List<Long> listaProdotti, @RequestHeader("idCarta") Long idCartaCredito) {
+	public Storico acquista(@RequestBody List<Long> listaProdotti, @RequestHeader("idCarta") Long idCartaCredito) throws Exception {
 		
 		return service.acquista(listaProdotti, idCartaCredito);
 	}

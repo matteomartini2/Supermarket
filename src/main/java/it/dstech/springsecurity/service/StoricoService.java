@@ -22,9 +22,9 @@ public class StoricoService {
 		return dao.findAll();
 	}
 	
-	public Iterable<Storico> findByUserId(Long userId) {
-		
-		return userService.findOne(userId).getStorico();
+	public Storico findByUserId(Long userId) throws Exception {
+		Storico storico = dao.findById(userId).orElseThrow(()->new Exception());
+		return storico;
 	}
 	
 	public Storico create(Storico storico) {

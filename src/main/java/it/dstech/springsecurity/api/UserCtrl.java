@@ -34,7 +34,7 @@ public class UserCtrl {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/findOne")
-	public User findOne(@RequestParam("id") Long id) {
+	public User findOne(@RequestParam("id") Long id) throws Exception {
 		
 		return service.findOne(id);
 	}

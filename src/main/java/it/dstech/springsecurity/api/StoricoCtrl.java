@@ -37,7 +37,7 @@ public class StoricoCtrl {
 		}
 		
 		@GetMapping("/{id}")
-		public Iterable<Storico> findOne(@PathVariable("id") Long id) {
+		public Storico findOne(@PathVariable("id") Long id) throws Exception {
 			return serviceStorico.findByUserId(id);
 		}
 		

@@ -36,9 +36,9 @@ public class ProdottoService {
 		return dao.findAll();
 	}
 	
-	public Prodotto findOne(Long id) {
-		
-		return dao.findById(id).get();
+	public Prodotto findOne(Long id) throws Exception {
+		Prodotto prodotto = dao.findById(id).orElseThrow(()-> new Exception());
+		return prodotto;
 	}
 	
 	public void deleteAll() {
@@ -73,7 +73,7 @@ public class ProdottoService {
 		return dao.save(old);
 	}
 	
-	public Storico acquista (List<Long> listaIdProdotti, Long idCartaCredito) {
+	public Storico acquista (List<Long> listaIdProdotti, Long idCartaCredito) throws Exception {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User u = userService.findByUsername(auth.getName());
